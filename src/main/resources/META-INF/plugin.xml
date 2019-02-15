@@ -1,0 +1,45 @@
+<idea-plugin>
+    <id>io.owen.gittemplate</id>
+    <name>GitTemplate</name>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <defaultLiveTemplatesProvider implementation="io.owen.plugin.gittemplate.GitBranchTemplateProvider"/>
+        <liveTemplateContext implementation="io.owen.plugin.gittemplate.GitBranchContext"/>
+        <liveTemplateMacro implementation="io.owen.plugin.gittemplate.GitBranchMacro" />
+    </extensions>
+
+    <actions>
+        <group id="gitbranch.Menu" class="io.owen.plugin.gittemplate.popup.GitDynamicBranchGroup" popup="true" text="GitTemplate">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+
+        <action id="io.owen.plugin.gittemplate.popup.GitBranchAction" class="io.owen.plugin.gittemplate.popup.GitBranchAction" text="Test Action">
+            <add-to-group group-id="gitbranch.Menu" anchor="last"/>
+        </action>
+
+        <action id="io.owen.plugin.gittemplate.GitBranchPopupAction" class="io.owen.plugin.gittemplate.GitBranchPopupAction"
+        text="Show branch list"
+        popup="true"
+        description="Show branch list description">
+        </action>
+
+        <action id="io.owen.plugin.gittemplate.CommentPopupAction" class="io.owen.plugin.gittemplate.CommentPopupAction"
+        text="Write comment"
+        popup="true"
+        description="Write comments">
+
+        </action>
+    </actions>
+
+
+
+
+
+</idea-plugin>
