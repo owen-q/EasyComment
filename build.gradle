@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.intellij' version '0.4.2'
 }
 
+//apply from: "gradle.properties"
+
 group 'io.owen'
 version '1.0-SNAPSHOT'
 
@@ -23,11 +25,20 @@ dependencies {
 }
 
 intellij {
+//    version '2018.1.5'
     version '2018.1.5'
-    pluginName 'Easy comment'
+    pluginName 'EasyComment'
+    updateSinceUntilBuild false
 }
+
 patchPluginXml {
     changeNotes """
       Add change notes here.<br>
       <em>most HTML tags may be used</em>"""
+}
+
+
+publishPlugin {
+    username intellijPublishUsername
+    password intellijPublishPassword
 }
