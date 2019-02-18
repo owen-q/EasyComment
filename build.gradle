@@ -24,7 +24,7 @@ dependencies {
 
 intellij {
     version '2018.1.5'
-    pluginName 'GitLiveTemplate'
+    pluginName 'Easy comment'
 }
 patchPluginXml {
     changeNotes """
