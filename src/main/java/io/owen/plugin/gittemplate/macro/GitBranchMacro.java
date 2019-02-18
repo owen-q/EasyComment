@@ -1,4 +1,4 @@
-package io.owen.plugin.gittemplate;
+package io.owen.plugin.gittemplate.macro;
 
 import com.intellij.codeInsight.template.*;
 import com.intellij.codeInsight.template.macro.MacroBase;

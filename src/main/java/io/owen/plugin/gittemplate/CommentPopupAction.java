@@ -14,7 +14,6 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.JBPopupListener;
 import com.intellij.openapi.ui.popup.LightweightWindowEvent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -26,9 +25,7 @@ import java.util.List;
  * Created by owen_q on 15/02/2019.
  */
 public class CommentPopupAction extends AnAction {
-    private List<String> commentCommands = Arrays.asList("todo", "unused", "done");
-//    private AnActionEvent actionEvent = null;
-
+    private List<String> commentCommands = Arrays.asList("TODO", "FIXME", "XXX", "CHECKME", "DOCME", "TESTME", "PENDING");
     private JList jList = null;
     private Project project = null;
     private Editor editor = null;
@@ -60,15 +57,6 @@ public class CommentPopupAction extends AnAction {
 
         jList.addListSelectionListener(e -> {
             if(!e.getValueIsAdjusting()) {
-                /*
-                JList source = (JList)e.getSource();
-                if(source != null)
-                    selectedCommand = source.getSelectedValue().toString();
-                else{
-                    int idx = e.getFirstIndex();
-                    selectedCommand = commentCommands.get(idx);
-                }
-                */
                 int idx = e.getFirstIndex();
                 selectedCommand = commentCommands.get(idx);
             }
@@ -78,16 +66,11 @@ public class CommentPopupAction extends AnAction {
     @Override
     public void beforeActionPerformedUpdate(@NotNull AnActionEvent e) {
         this.editor = e.getData(DataKeys.EDITOR);
-
-    }
-
-    public CommentPopupAction(@Nullable String text) {
-
     }
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        JBPopup popup = JBPopupFactory.getInstance().createListPopupBuilder(jList).createPopup();
+        JBPopup popup = JBPopupFactory.getInstance().createListPopupBuilder(jList).setTitle("Comment types").createPopup();
         popup.addListener(new JBPopupListener() {
             @Override
             public void beforeShown(LightweightWindowEvent event) {
@@ -110,11 +93,7 @@ public class CommentPopupAction extends AnAction {
 
     public String convert(String command) {
         String input = "";
-//        if(command.equals("todo")){
-//            input = "//TODO";
-//        }
-//        else
-        input = "//" + command.toUpperCase() + " ";
+        input = "// " + command.toUpperCase() + " ";
 
         return input;
     }

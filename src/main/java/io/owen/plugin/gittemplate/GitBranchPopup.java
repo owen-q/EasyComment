@@ -69,7 +69,8 @@ public class GitBranchPopup {
 
 
     public void show(){
-        JBPopup popup = JBPopupFactory.getInstance().createListPopupBuilder(jList).createPopup();
+        JBPopup popup = JBPopupFactory.getInstance().createListPopupBuilder(jList).setTitle("Branches").createPopup();
+
         popup.addListener(new JBPopupListener() {
             @Override
             public void beforeShown(LightweightWindowEvent event) {
@@ -88,14 +89,20 @@ public class GitBranchPopup {
         popup.showInBestPositionFor(this.editor);
     }
 
+    public String refine(String dirtyBranchName) {
+        String pattern = "refs/heads/";
+        int idx = dirtyBranchName.indexOf(pattern);
+        return dirtyBranchName.substring(idx + pattern.length());
+    }
+
     public void write(String text){
         final Document document = this.editor.getDocument();
         VisualPosition visualPosition = this.editor.getCaretModel().getVisualPosition();
         int startPosition = this.editor.getSelectionModel().getSelectionStart();
 
         WriteCommandAction.runWriteCommandAction(this.project, () -> {
-            document.insertString(startPosition, text);
-            VisualPosition newVisualPosition1 = new VisualPosition(visualPosition.line, visualPosition.column + text.length());
+            document.insertString(startPosition, "[" + text + "]");
+            VisualPosition newVisualPosition1 = new VisualPosition(visualPosition.line, visualPosition.column + text.length() + 2);
             this.editor.getCaretModel().moveToVisualPosition(newVisualPosition1);
         });
     }
@@ -116,7 +123,8 @@ public class GitBranchPopup {
             String[] result = new String[refList.size()];
 
             for(int i=0; i<refList.size(); i++){
-                result[i] = (refList.get(i).getName());
+                String dirtyBranchName = (refList.get(i).getName());
+                result[i] = refine(dirtyBranchName);
             }
 
             return result;
@@ -125,5 +133,7 @@ public class GitBranchPopup {
             return new String[]{"error"};
         }
     }
+
+
 
 }

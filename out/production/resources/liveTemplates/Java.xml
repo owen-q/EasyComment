@@ -1,0 +1,52 @@
+<templateSet group="Java">
+  <template name="linfo" value="if(logger.isInfoEnabled())&#10;    logger.info($EXPR$);" description="Logging with INFO level" toReformat="false" toShortenFQNames="true">
+    <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="ldebug" value="if(logger.isDebugEnabled())&#10;    logger.debug($EXPR$);" description="Logging with DEBUG level" toReformat="false" toShortenFQNames="true">
+    <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="handle" value="public Mono&lt;ServerResponse&gt; handle$EXPR$(ServerRequest serverRequest){&#10;    Mono&lt;?&gt; requestBodyMono = serverRequest.bodyToMono($EXPR2$);&#10;&#10;    return requestBodyMono&#10;            .map(ExceptionWrapper.wrapper($EXPR3$))&#10;            .onErrorResume(ExceptionUtil::handleException)&#10;            .map(ResponseHelper::createApiResponse)&#10;            .flatMap(ResponseHelper::createServerResponse);&#10;}" description="Generate reactive handler" toReformat="false" toShortenFQNames="true">
+    <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPR2" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPR3" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="process" value="public InternalMessage process$EXPR$() {&#10;    return InternalMessage.OK;&#10;}" description="Create Process Facade for reactive" toReformat="false" toShortenFQNames="true">
+    <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="todor" value="//TODO: Refactoring ... " description="todo-refactoring comments" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="todow" value="// TODO(owen.qqq): " description="todo comment by owen" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="GROOVY" value="true" />
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="unuse" value="// UNUSED(owen.qqq): " description="unused comment by owen" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="GROOVY" value="true" />
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="branch" value="// test $branch$ template " toReformat="false" toShortenFQNames="true">
+    <variable name="branch" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GIT_BRANCH_TEMPLATE" value="true" />
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>
