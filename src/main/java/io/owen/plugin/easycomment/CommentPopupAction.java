@@ -3,6 +3,7 @@ package io.owen.plugin.easycomment;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.ShortcutSet;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -61,6 +62,15 @@ public class CommentPopupAction extends AnAction {
                 selectedCommand = commentCommands.get(idx);
             }
         });
+    }
+
+
+    @Override
+    protected void setShortcutSet(ShortcutSet shortcutSet) {
+
+
+//        super.setShortcutSet(shortcutSet);
+
     }
 
     @Override

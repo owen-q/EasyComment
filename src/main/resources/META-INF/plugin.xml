@@ -1,11 +1,12 @@
 <idea-plugin>
     <id>io.owen.plugin.easycomment</id>
     <name>EasyComment</name>
-    <vendor email="owen.q.dev@gmail.com">owen</vendor>
+    <vendor email="owen.q.dev@gmail.com" url="https://github.com/owen-q/EasyComment">owen</vendor>
 
     <description><![CDATA[
     Easy Comment<br>Write comment with <strong>dynamic parameters<strong><br>
-    <em>Current version support Git related variables</em>
+    Current version support Git related variables
+    <em>Visit github repository for more</em>
     ]]></description>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -33,8 +34,10 @@
         <action id="io.owen.plugin.easycomment.CommentPopupAction" class="io.owen.plugin.easycomment.CommentPopupAction"
                 text="Write comment"
                 popup="true"
-                description="Write comments">
+                description="Write comments"
+        >
 
+            <keyboard-shortcut first-keystroke="control command /" keymap="$default"></keyboard-shortcut>
         </action>
     </actions>
 

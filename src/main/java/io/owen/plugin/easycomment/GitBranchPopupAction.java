@@ -9,23 +9,15 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.VisualPosition;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectCoreUtil;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.JBPopupListener;
 import com.intellij.openapi.ui.popup.LightweightWindowEvent;
-import com.intellij.openapi.vfs.VirtualFile;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
-import java.util.List;
 
 /**
  * Created by owen_q on 15/02/2019.
@@ -40,9 +32,6 @@ public class GitBranchPopupAction extends AnAction {
         this.project = ProjectCoreUtil.theOnlyOpenProject();
     }
 
-    public void writeText(){
-    }
-
     @Override
     public void beforeActionPerformedUpdate(@NotNull AnActionEvent e) {
         this.editor = e.getData(DataKeys.EDITOR);
@@ -50,7 +39,7 @@ public class GitBranchPopupAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        JList jList = new JList(getBranchList(e.getProject()));
+        JList jList = new JList(GitUtil.getBranchList());
         jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 
@@ -109,31 +98,4 @@ public class GitBranchPopupAction extends AnAction {
             this.editor.getCaretModel().moveToVisualPosition(newVisualPosition1);
         });
     }
-
-    private String[] getBranchList(Project project){
-        try{
-            VirtualFile projectBaseDir = project.getWorkspaceFile();
-            String projectPath = ProjectFileIndex.SERVICE.getInstance(project).getContentRootForFile(projectBaseDir).getPath();
-
-            Repository existingRepo = new FileRepositoryBuilder()
-                    .setGitDir(new File(projectPath + "/.git"))
-                    .build();
-
-            Git git = new Git(existingRepo);
-
-            List<Ref> refList = git.branchList().call();
-
-            String[] result = new String[refList.size()];
-
-            for(int i=0; i<refList.size(); i++){
-                result[i] = (refList.get(i).getName());
-            }
-
-            return result;
-        }
-        catch (Exception e){
-            return new String[]{"error"};
-        }
-    }
-
 }

@@ -6,7 +6,7 @@ plugins {
 //apply from: "gradle.properties"
 
 group 'io.owen'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 sourceCompatibility = 1.8
 
@@ -26,15 +26,15 @@ dependencies {
 
 intellij {
 //    version '2018.1.5'
-    version '2018.1.5'
+
+    version '15.0.1'
     pluginName 'EasyComment'
-    updateSinceUntilBuild false
+//    updateSinceUntilBuild false
 }
 
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      Create shortcut for writing comments with dynamic comment type and git branch name"""
 }
 
 
@@ -42,3 +42,4 @@ publishPlugin {
     username intellijPublishUsername
     password intellijPublishPassword
 }
+
