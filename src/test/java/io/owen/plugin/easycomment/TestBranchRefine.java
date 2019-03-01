@@ -29,4 +29,12 @@ public class TestBranchRefine {
         int idx = dirtyBranchName.indexOf(pattern);
         return dirtyBranchName.substring(idx + pattern.length());
     }
+
+
+    @Test
+    public void testFormatParse() {
+        String format = "asdfasdf $branch$ asdf : asfasdfasdf asd f212415!@$#@!$#@$^";
+
+        System.out.println(format.replace("$branch", "2222222222222"));
+    }
 }

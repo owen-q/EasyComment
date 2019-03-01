@@ -14,6 +14,7 @@ import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.JBPopupListener;
 import com.intellij.openapi.ui.popup.LightweightWindowEvent;
+import io.owen.plugin.easycomment.settings.PluginStateManager;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -32,10 +33,13 @@ public class CommentPopupAction extends AnAction {
     private Editor editor = null;
     private boolean isEscape = false;
     private String selectedCommand = "";
+    private PluginStateManager stateManager = PluginStateManager.getInstance();
 
     public CommentPopupAction() {
+        String[] contents = commentCommands.toArray(new String[0]);
+
         this.project = ProjectCoreUtil.theOnlyOpenProject();
-        this.jList = new JList(commentCommands.toArray(new String[0]));
+        this.jList = new JList(contents);
 
         this.jList.addKeyListener(new KeyListener() {
             @Override
@@ -64,13 +68,10 @@ public class CommentPopupAction extends AnAction {
         });
     }
 
-
     @Override
     protected void setShortcutSet(ShortcutSet shortcutSet) {
-
-
+        // TODO(owen.qqq): Set default shortcuts
 //        super.setShortcutSet(shortcutSet);
-
     }
 
     @Override
@@ -80,25 +81,34 @@ public class CommentPopupAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        JBPopup popup = JBPopupFactory.getInstance().createListPopupBuilder(jList).setTitle("Comment types").createPopup();
-        popup.addListener(new JBPopupListener() {
-            @Override
-            public void beforeShown(LightweightWindowEvent event) {
+        if(this.stateManager.isCommentTypeEnabled()) {
+            JBPopup popup = JBPopupFactory.getInstance().createListPopupBuilder(jList).setTitle("Comment types").createPopup();
+            popup.addListener(new JBPopupListener() {
+                @Override
+                public void beforeShown(LightweightWindowEvent event) {
 
-            }
-
-            @Override
-            public void onClosed(LightweightWindowEvent event) {
-                // write...
-                if(!isEscape) {
-                    write(convert(selectedCommand));
-                    GitBranchPopup gitBranchPopup = new GitBranchPopup(editor);
-                    gitBranchPopup.show();
                 }
-                isEscape = false;
-            }
-        });
-        popup.showInBestPositionFor(e.getData(DataKeys.EDITOR));
+
+                @Override
+                public void onClosed(LightweightWindowEvent event) {
+                    if(!isEscape) {
+                        write(convert(selectedCommand));
+//                        CommentWriteUtil.write(stateManager.getFormat(), "$comment$", convert(selectedCommand), editor);
+
+                        //TODO: Refactoring ...
+                        if(stateManager.isGitBranchNameEnabled()) {
+                            GitBranchPopup gitBranchPopup = new GitBranchPopup(editor);
+                            gitBranchPopup.show();
+                        }
+
+                    }
+                    isEscape = false;
+                }
+            });
+            popup.showInBestPositionFor(e.getData(DataKeys.EDITOR));
+        }
+
+
     }
 
     public String convert(String command) {

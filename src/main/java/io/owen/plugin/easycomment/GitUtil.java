@@ -19,11 +19,6 @@ public class GitUtil {
     private static Project currentProject;
     private static String projectAbsolutePath;
 
-    static {
-//        VirtualFile projectBaseDir = .getWorkspaceFile();
-//        String projectPath = ProjectFileIndex.SERVICE.getInstance(project).getContentRootForFile(projectBaseDir).getPath();
-    }
-
     public static String[] getBranchList(){
         try{
             Project currentProject = ProjectCoreUtil.theOnlyOpenProject();
@@ -50,6 +45,33 @@ public class GitUtil {
         catch (Exception e){
             return new String[]{"error"};
         }
+    }
+
+    private static Repository getCurrentRepository(){
+        try{
+            Project currentProject = ProjectCoreUtil.theOnlyOpenProject();
+            VirtualFile projectBaseDir = currentProject.getWorkspaceFile();
+            String projectPath = ProjectFileIndex.SERVICE.getInstance(currentProject).getContentRootForFile(projectBaseDir).getPath();
+
+            Repository existingRepo = new FileRepositoryBuilder()
+                    .setGitDir(new File(projectPath + "/.git"))
+                    .build();
+
+            return existingRepo;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    public static String getUserNmae(){
+        Repository currentRepository = getCurrentRepository();
+        return currentRepository.getConfig().getString("user", null, "name");
+    }
+
+    public static String getUserEmail(){
+        Repository currentRepository = getCurrentRepository();
+        return currentRepository.getConfig().getString("user", null, "email");
     }
 
 }

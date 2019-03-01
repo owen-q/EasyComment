@@ -27,11 +27,8 @@ import java.util.List;
  * Created by owen_q on 15/02/2019.
  */
 public class GitBranchPopup {
-
     private String selectedBranch = "";
-
     private JList jList = null;
-
     private Editor editor = null;
     private Project project = null;
     private boolean isExclude = false;

@@ -35,9 +35,6 @@ public class GitBranchAction extends AnAction {
 
     }
 
-
-
-
     @Override
     public void update(AnActionEvent e) {
         Project project = e.getProject();
