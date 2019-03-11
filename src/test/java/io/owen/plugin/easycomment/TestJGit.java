@@ -17,9 +17,6 @@ public class TestJGit {
                     .setGitDir(new File("/Users/owen/work/owen-toy/easy-comment" + "/.git"))
                     .build();
 
-
-            existingRepo.getConfig().
-
             String userName = "";
             String userEmail = "";
 

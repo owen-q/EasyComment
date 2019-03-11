@@ -60,12 +60,11 @@ public class PluginStateManager implements PersistentStateComponent<PluginState>
 
     // TODO(owen.qqq):
     public void loadGitconfig(){
-        String userName = GitUtil.getUserNmae();
+        String userName = GitUtil.getUserName();
         String userEmail = GitUtil.getUserEmail();
+
         this.pluginState.setGitUserEmail(userEmail);
         this.pluginState.setGitUserName(userName);
     }
-
-
 
 }

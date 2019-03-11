@@ -64,7 +64,7 @@ public class GitUtil {
         }
     }
 
-    public static String getUserNmae(){
+    public static String getUserName(){
         Repository currentRepository = getCurrentRepository();
         return currentRepository.getConfig().getString("user", null, "name");
     }
