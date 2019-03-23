@@ -11,6 +11,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 import java.io.File;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by owen_q on 15/02/2019.
@@ -18,6 +19,12 @@ import java.util.List;
 public class GitUtil {
     private static Project currentProject;
     private static String projectAbsolutePath;
+    private static final String GIT_BRANCH_PREFIX = "refs/heads/";
+
+    private static String refine(String dirtyBranchName) {
+        int idx = dirtyBranchName.indexOf(GIT_BRANCH_PREFIX);
+        return dirtyBranchName.substring(idx + GIT_BRANCH_PREFIX.length());
+    }
 
     public static String[] getBranchList(){
         try{
@@ -30,17 +37,18 @@ public class GitUtil {
                     .build();
 
             Git git = new Git(existingRepo);
-//            git.log().call().forEach(revCommit -> revCommit.au);
-
             List<Ref> refList = git.branchList().call();
 
-            String[] result = new String[refList.size()];
+            return refList.stream().map(Ref::getName).map(GitUtil::refine).collect(Collectors.toList()).toArray(new String[0]);
 
+            /*
             for(int i=0; i<refList.size(); i++){
                 result[i] = (refList.get(i).getName());
             }
 
             return result;
+            */
+
         }
         catch (Exception e){
             return new String[]{"error"};

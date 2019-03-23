@@ -40,8 +40,7 @@ public class PluginStateManager implements PersistentStateComponent<PluginState>
         return getInstance(ProjectCoreUtil.theOnlyOpenProject());
     }
 
-    // get, setter facade
-
+    /** get, setter facade */
     public void setFormat(String format){
         this.pluginState.setFormat(format);
     }

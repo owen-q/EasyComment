@@ -2,22 +2,16 @@ package io.owen.plugin.easycomment.macro;
 
 import com.intellij.codeInsight.template.*;
 import com.intellij.codeInsight.template.macro.MacroBase;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.vfs.VirtualFile;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import io.owen.plugin.easycomment.GitUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
 
 /**
  * Created by owen_q on 14/02/2019.
  */
 public class GitUserNameMacro extends MacroBase {
-    private static final String NAME = "gitBranchName";
-    private static final String DESCRIPTION = "gitBranchName()";
+    private static final String NAME = "gitUserName";
+    private static final String DESCRIPTION = "gitUserName()";
 
     public GitUserNameMacro(){
         super(NAME, DESCRIPTION);
@@ -62,31 +56,6 @@ public class GitUserNameMacro extends MacroBase {
     }
 
     private Result getResult(ExpressionContext context){
-        String branchName = getCurrentBranchName(context.getProject());
-        return new TextResult(branchName);
+        return new TextResult(GitUtil.getUserName());
     }
-
-    private String getCurrentBranchName(Project project) {
-        String branchName = "";
-
-        try {
-            VirtualFile projectBaseDir = project.getWorkspaceFile();
-            String projectPath = ProjectFileIndex.SERVICE.getInstance(project).getContentRootForFile(projectBaseDir).getPath();
-
-            Repository existingRepo = new FileRepositoryBuilder()
-                    .setGitDir(new File(projectPath + "/.git"))
-                    .build();
-
-            branchName = existingRepo.getBranch();
-
-            if(branchName.equals("") || branchName == null)
-                branchName = "Project is not initialized";
-        }
-        catch (Exception e) {
-            branchName = "Project is not initialized";
-        }
-
-        return branchName;
-    }
-
 }

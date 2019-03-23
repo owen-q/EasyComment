@@ -7,6 +7,7 @@
     Easy Comment<br>Write comment with <strong>dynamic parameters<strong><br>
     Current version support Git related variables
     <em>Visit github repository for more</em>
+    <br><a href="https://github.com/owen-q/EasyComment">Move to Github</a>
     ]]></description>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -35,6 +36,9 @@
                 popup="true"
                 description="Show comment type list">
         </action>
+
+
+
 
         <action id="io.owen.plugin.easycomment.action.EasyCommentActionWrapper" class="io.owen.plugin.easycomment.action.EasyCommentActionWrapper"
                 text="Write dynamic comments"

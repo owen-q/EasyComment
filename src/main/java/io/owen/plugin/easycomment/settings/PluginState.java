@@ -19,11 +19,15 @@ public class PluginState {
     private final String GIT_BRANCH_NAME_CONSTANT = "$git_branch$";
     private boolean isGitBranchNameEnabled;
 
+    protected PluginState() {
+
+    }
 
     public String getFormat() {
         return format;
     }
 
+    // Set user defined comment format
     public void setFormat(String format) {
         this.format = format;
     }

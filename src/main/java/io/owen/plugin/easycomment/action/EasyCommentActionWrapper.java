@@ -5,8 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import io.owen.plugin.easycomment.popup.CommentPopup;
-import io.owen.plugin.easycomment.popup.GitBranchPopup;
+import io.owen.plugin.easycomment.core.CommentEventDispatcher;
 import io.owen.plugin.easycomment.settings.PluginStateManager;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,17 +36,9 @@ public class EasyCommentActionWrapper extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-//        if(this.stateManager.isCommentTypeEnabled()) {
-        System.out.println("ㅡㅡ");
-            Editor editor = e.getData(DataKeys.EDITOR);
-            CommentPopup commentPopup = new CommentPopup(editor);
-            commentPopup.show();
-
-            GitBranchPopup gitBranchPopup = new GitBranchPopup(editor);
-            gitBranchPopup.show();
-
-            // TODO(owen.qqq): route next input
-//        }
+        Editor editor = e.getData(DataKeys.EDITOR);
+        CommentEventDispatcher.getInstance().clear();
+        CommentEventDispatcher.getInstance().start("", editor);
     }
 
     public String convert(String command) {
