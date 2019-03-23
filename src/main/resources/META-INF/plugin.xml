@@ -7,6 +7,7 @@
     Easy Comment<br>Write comment with <strong>dynamic parameters<strong><br>
     Current version support Git related variables
     <em>Visit github repository for more</em>
+    <br><a href="https://github.com/owen-q/EasyComment">Move to Github</a>
     ]]></description>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -24,22 +25,27 @@
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </group>
 
-        <action id="io.owen.plugin.easycomment.GitBranchPopupAction" class="io.owen.plugin.easycomment.GitBranchPopupAction"
+        <action id="io.owen.plugin.easycomment.action.GitBranchPopupActionWrapper" class="io.owen.plugin.easycomment.action.GitBranchPopupActionWrapper"
                 text="Show branch list"
                 popup="true"
-                description="Show branch list description">
+                description="Show branch list">
         </action>
 
-        <action id="io.owen.plugin.easycomment.CommentPopupAction" class="io.owen.plugin.easycomment.CommentPopupAction"
-                text="Write comment"
+        <action id="io.owen.plugin.easycomment.action.CommentPopupActionWrapper" class="io.owen.plugin.easycomment.action.CommentPopupActionWrapper"
+                text="Show comment types"
                 popup="true"
-                description="Write comments"
-        >
+                description="Show comment type list">
+        </action>
+
+
+
+
+        <action id="io.owen.plugin.easycomment.action.EasyCommentActionWrapper" class="io.owen.plugin.easycomment.action.EasyCommentActionWrapper"
+                text="Write dynamic comments"
+                popup="true"
+                description="Write dynamic comments">
         </action>
     </actions>
-
-
-
 
 
 

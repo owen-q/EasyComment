@@ -40,8 +40,7 @@ public class PluginStateManager implements PersistentStateComponent<PluginState>
         return getInstance(ProjectCoreUtil.theOnlyOpenProject());
     }
 
-    // get, setter facade
-
+    /** get, setter facade */
     public void setFormat(String format){
         this.pluginState.setFormat(format);
     }
@@ -60,12 +59,11 @@ public class PluginStateManager implements PersistentStateComponent<PluginState>
 
     // TODO(owen.qqq):
     public void loadGitconfig(){
-        String userName = GitUtil.getUserNmae();
+        String userName = GitUtil.getUserName();
         String userEmail = GitUtil.getUserEmail();
+
         this.pluginState.setGitUserEmail(userEmail);
         this.pluginState.setGitUserName(userName);
     }
-
-
 
 }

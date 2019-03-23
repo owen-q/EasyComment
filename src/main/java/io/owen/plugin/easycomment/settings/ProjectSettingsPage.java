@@ -4,6 +4,7 @@ import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
+import io.owen.plugin.easycomment.core.CommentEventDispatcher;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -96,6 +97,7 @@ public class ProjectSettingsPage implements SearchableConfigurable, Configurable
     @Override
     public void apply() throws ConfigurationException {
         this.stateManager.setFormat(commentFormatInput.getText());
+        CommentEventDispatcher.getInstance().reloadCommentFormat();
     }
 
     @Override

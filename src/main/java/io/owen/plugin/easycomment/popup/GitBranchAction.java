@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by owen_q on 15/02/2019.
  */
+@Deprecated
 public class GitBranchAction extends AnAction {
     private final GitDynamicBranchGroup actionGroup = new GitDynamicBranchGroup();
 
@@ -32,7 +33,6 @@ public class GitBranchAction extends AnAction {
         WriteCommandAction.runWriteCommandAction(e.getProject(), () -> {
             document.insertString(startPosition, "ohhhhhhhhh");
         });
-
     }
 
     @Override
