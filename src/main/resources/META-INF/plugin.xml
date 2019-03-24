@@ -4,8 +4,9 @@
     <vendor email="owen.q.dev@gmail.com" url="https://github.com/owen-q/EasyComment">owen</vendor>
 
     <description><![CDATA[
-    Easy Comment<br>Write comment with <strong>dynamic parameters<strong><br>
-    Current version support Git related variables
+    <strong>Easy Comment</strong><br>
+    You can write comments using dynamic variables more easier<br>
+    You can use other variable in your existed LiveTemplate or custom comment formats such as git author name, current branch name<br>
     <em>Visit github repository for more</em>
     <br><a href="https://github.com/owen-q/EasyComment">Move to Github</a>
     ]]></description>
