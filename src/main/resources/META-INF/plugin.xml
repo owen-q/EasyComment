@@ -4,8 +4,9 @@
     <vendor email="owen.q.dev@gmail.com" url="https://github.com/owen-q/EasyComment">owen</vendor>
 
     <description><![CDATA[
-    Easy Comment<br>Write comment with <strong>dynamic parameters<strong><br>
-    Current version support Git related variables
+    <strong>Easy Comment</strong><br>
+    You can write comments using dynamic variables more easier<br>
+    You can use other variable in your existed LiveTemplate or custom comment formats such as git author name, current branch name<br>
     <em>Visit github repository for more</em>
     ]]></description>
 
@@ -28,13 +29,13 @@
         <action id="io.owen.plugin.easycomment.GitBranchPopupAction" class="io.owen.plugin.easycomment.GitBranchPopupAction"
                 text="Show branch list"
                 popup="true"
-                description="Show branch list description">
+                description="Show branch list">
         </action>
 
         <action id="io.owen.plugin.easycomment.CommentPopupAction" class="io.owen.plugin.easycomment.CommentPopupAction"
                 text="Write comment"
                 popup="true"
-                description="Write comments"
+                description="Write formatted comments"
         >
 
             <keyboard-shortcut first-keystroke="control command /" keymap="$default"></keyboard-shortcut>
