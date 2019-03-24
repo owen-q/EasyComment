@@ -8,6 +8,7 @@
     You can write comments using dynamic variables more easier<br>
     You can use other variable in your existed LiveTemplate or custom comment formats such as git author name, current branch name<br>
     <em>Visit github repository for more</em>
+    <br><a href="https://github.com/owen-q/EasyComment">Move to Github</a>
     ]]></description>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -15,34 +16,37 @@
         <defaultLiveTemplatesProvider implementation="io.owen.plugin.easycomment.GitBranchTemplateProvider"/>
         <liveTemplateContext implementation="io.owen.plugin.easycomment.GitBranchContext"/>
         <liveTemplateMacro implementation="io.owen.plugin.easycomment.macro.GitBranchMacro" />
+
+        <applicationService serviceImplementation="io.owen.plugin.easycomment.settings.PluginStateManager"/>
+        <projectConfigurable instance="io.owen.plugin.easycomment.settings.ProjectSettingsPage" />
     </extensions>
 
     <actions>
-        <group id="gitbranch.Menu" class="io.owen.plugin.easycomment.popup.GitDynamicBranchGroup" popup="true" text="GitTemplate">
+        <group id="io.owen.plugin.easycomment.popup.GitDynamicBranchGroup" class="io.owen.plugin.easycomment.popup.GitDynamicBranchGroup" popup="true" text="GitTemplate">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </group>
 
-        <action id="io.owen.plugin.easycomment.popup.GitBranchAction" class="io.owen.plugin.easycomment.popup.GitBranchAction" text="Test Action">
-            <add-to-group group-id="gitbranch.Menu" anchor="last"/>
-        </action>
-
-        <action id="io.owen.plugin.easycomment.GitBranchPopupAction" class="io.owen.plugin.easycomment.GitBranchPopupAction"
+        <action id="io.owen.plugin.easycomment.action.GitBranchPopupActionWrapper" class="io.owen.plugin.easycomment.action.GitBranchPopupActionWrapper"
                 text="Show branch list"
                 popup="true"
                 description="Show branch list">
         </action>
 
-        <action id="io.owen.plugin.easycomment.CommentPopupAction" class="io.owen.plugin.easycomment.CommentPopupAction"
-                text="Write comment"
+        <action id="io.owen.plugin.easycomment.action.CommentPopupActionWrapper" class="io.owen.plugin.easycomment.action.CommentPopupActionWrapper"
+                text="Show comment types"
                 popup="true"
-                description="Write formatted comments"
-        >
+                description="Show comment type list">
+        </action>
 
-            <keyboard-shortcut first-keystroke="control command /" keymap="$default"></keyboard-shortcut>
+
+
+
+        <action id="io.owen.plugin.easycomment.action.EasyCommentActionWrapper" class="io.owen.plugin.easycomment.action.EasyCommentActionWrapper"
+                text="Write dynamic comments"
+                popup="true"
+                description="Write dynamic comments">
         </action>
     </actions>
-
-
 
 
 
